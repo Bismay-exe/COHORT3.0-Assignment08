@@ -372,12 +372,13 @@ form {
     flex-direction: column;
     justify-content: space-between;
     gap: 24px;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 @media screen and (min-width: 769px) {
     .sidebar-maximized {
         min-width: 320px;
+        width: 320px;
         padding: 24px;
     }
 
@@ -414,7 +415,26 @@ form {
     }
 }
 
+@media screen and (min-width: 769px) {
+
+    .sidebar-maximized ~ .main-page #navbar .nav-header .logo,
+    .sidebar-maximized ~ .main-page #navbar .nav-header .logo-texts {
+        display: none;
+    }
+
+    .sidebar-minimized ~ .main-page #navbar .nav-header .logo {
+        display: none;
+    }
+
+    .sidebar-minimized ~ .main-page #navbar .nav-header .logo-texts {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
 .sidebar-header {
+    height: 50px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -610,6 +630,7 @@ form {
     position: sticky;
     top: 0;
     width: 100%;
+    height: 65px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1340,9 +1361,6 @@ thead th {
         display: flex;
     }
 }
-
-
-
 
 .type-icon {
     margin-right: 8px;
