@@ -126,7 +126,6 @@ function showApp() {
     renderStats()
     renderTable()
     updateName()
-    loadChart()
 
     let settingsName = document.getElementById('settings-name')
     let settingsCurrency = document.getElementById('settings-currency')
@@ -232,7 +231,7 @@ transactionForm.addEventListener('submit', function(e) {
 
     renderStats()
     renderTable()
-    loadChart()
+
 
     addScreen.style.display = 'none'
     document.querySelector('#transactionForm').reset()
@@ -247,7 +246,6 @@ function deleteTransaction(id) {
     localStorage.setItem('fintrack_transactions', JSON.stringify(transactions))
     renderStats()
     renderTable()
-    loadChart()
     showToast('Transaction deleted.', 'error')
 }
 
@@ -274,11 +272,13 @@ function renderStats() {
         cards[3].querySelector('h1').textContent = transactions.length
 
         if (balance >= 0) {
-            cards[0].querySelector('h1').style.color = 'var(--green)'
+            cards[0].querySelector('h1').style.color = 'var(--blue)'
         } else {
             cards[0].querySelector('h1').style.color = 'var(--red)'
         }
     }
+
+    updateChart(totalIncome, totalExpense)
 }
 
 function renderTable() {
@@ -359,7 +359,7 @@ typeFilter.addEventListener('change', function() {
 themeBtn.addEventListener('click', function() {
     darkMode = !darkMode
     applyTheme()
-    if (chart) drawChart()
+    renderStats()
 })
 
 function applyTheme() {
@@ -403,7 +403,6 @@ function saveCurrency() {
     localStorage.setItem('fintrack_currency', currency)
     renderStats()
     renderTable()
-    if (chart) drawChart()
     showToast('Currency updated!', 'success')
 }
 
@@ -411,7 +410,7 @@ function toggleDarkMode() {
     let darkToggle = document.getElementById('dark-toggle')
     darkMode = darkToggle.checked
     applyTheme()
-    if (chart) drawChart()
+    renderStats()
 }
 
 function resetAllData() {
@@ -439,7 +438,6 @@ function resetAllData() {
     applyTheme()
     renderStats()
     renderTable()
-    if (chart) drawChart()
     showToast('All data reset.', 'error')
 }
 
@@ -448,117 +446,43 @@ function updateName() {
     if (nameEl) nameEl.textContent = userName
 }
 
-function loadChart() {
-    if (typeof Chart === 'undefined') {
-        let script = document.createElement('script')
-        script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js'
-        script.onload = drawChart
-        document.head.appendChild(script)
-    } else {
-        drawChart()
-    }
-}
-
-function drawChart() {
+function updateChart(income, expense) {
     let canvas = document.getElementById('chartCanvas')
     if (!canvas) return
 
-    let months = []
-    let incomeData = []
-    let expenseData = []
+    let ctx = canvas.getContext('2d')
 
-    for (let i = 5; i >= 0; i--) {
-        let d = new Date()
-        d.setMonth(d.getMonth() - i)
-        let label = d.toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
-        let ym = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0')
-        months.push(label)
-
-        let inc = 0
-        let exp = 0
-        for (let j = 0; j < transactions.length; j++) {
-            let t = transactions[j]
-            if (t.date.startsWith(ym)) {
-                if (t.type === 'income') inc += t.amount
-                else exp += t.amount
-            }
-        }
-        incomeData.push(inc)
-        expenseData.push(exp)
+    if (chart) {
+        chart.destroy()
     }
 
-    let isDark = document.documentElement.getAttribute('data-theme') === 'dark'
-    let gridColor = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)'
-    let textColor = isDark ? '#a0a0a0' : '#888'
-
-    if (chart) chart.destroy()
-
-    chart = new Chart(canvas, {
+    chart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: months,
+            labels: ['Income vs Expenses'],
             datasets: [
                 {
                     label: 'Income',
-                    data: incomeData,
-                    backgroundColor: 'rgba(16,185,129,0.85)',
-                    borderRadius: 8,
-                    borderSkipped: false
+                    data: [income],
+                    backgroundColor: '#10B981',
+                    borderRadius: 6
                 },
                 {
-                    label: 'Expense',
-                    data: expenseData,
-                    backgroundColor: 'rgba(225,29,72,0.85)',
-                    borderRadius: 8,
-                    borderSkipped: false
+                    label: 'Expenses',
+                    data: [expense],
+                    backgroundColor: '#E11D48',
+                    borderRadius: 6
                 }
             ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    labels: {
-                        color: textColor,
-                        font: { family: 'Inter', size: 13 },
-                        usePointStyle: true,
-                        pointStyle: 'circle'
-                    }
-                },
-                tooltip: {
-                    backgroundColor: isDark ? '#1e1e2e' : '#fff',
-                    titleColor: isDark ? '#e0e0e0' : '#111',
-                    bodyColor: isDark ? '#aaa' : '#555',
-                    borderColor: isDark ? '#333' : '#e5e5e5',
-                    borderWidth: 1,
-                    padding: 12,
-                    cornerRadius: 10,
-                    callbacks: {
-                        label: function(ctx) {
-                            let sym = currencySymbols[currency] || '₹'
-                            return ' ' + ctx.dataset.label + ': ' + sym + ctx.parsed.y.toFixed(2)
-                        }
-                    }
-                }
-            },
             scales: {
-                x: {
-                    grid: { color: gridColor },
-                    ticks: { color: textColor, font: { family: 'Inter', size: 12 } }
-                },
-                y: {
-                    grid: { color: gridColor },
-                    ticks: {
-                        color: textColor,
-                        font: { family: 'Inter', size: 12 },
-                        callback: function(v) {
-                            let sym = currencySymbols[currency] || '₹'
-                            if (v >= 1000) return sym + (v / 1000).toFixed(0) + 'k'
-                            return sym + v
-                        }
-                    }
-                }
+                y: { beginAtZero: true }
+            },
+            plugins: {
+                legend: { position: 'top' }
             }
         }
     })

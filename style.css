@@ -10,40 +10,40 @@
     --border-color: #0000002d;
 
     --red: #E11D48;
-    --red-bg: #F9EFF0;
+    --red-bg: #E11D481c;
 
     --green: #10B981;
-    --green-bg: #effff4;
+    --green-bg: #10B9811c;
 
     --blue: #0EA5E9;
-    --blue-bg: #eff6ff;
+    --blue-bg: #0ea4e91c;
 
     --purple: #A855F7;
-    --purple-bg: #f3e8ff;
+    --purple-bg: #A855F71c;
 
     --yellow: #FFC107;
-    --yellow-bg: #fff9c4;
+    --yellow-bg: #FFC1071c;
 
     --pink: #FF6B9D;
-    --pink-bg: #ffeff7;
+    --pink-bg: #FF6B9D1c;
 
     --orange: #FF9800;
-    --orange-bg: #fff3e0;
+    --orange-bg: #FF98001c;
 
     --cyan: #00BCD4;
-    --cyan-bg: #e0f7fa;
+    --cyan-bg: #00BCD41c;
 
     --lime: #CDDC39;
-    --lime-bg: #f0f4c3;
+    --lime-bg: #CDDC391c;
 
     --teal: #009688;
-    --teal-bg: #e0f2f1;
+    --teal-bg: #0096881c;
 
     --indigo: #3F51B5;
-    --indigo-bg: #e8eaf6;
+    --indigo-bg: #3F51B51c;
 
     --violet: #9C27B0;
-    --violet-bg: #f3e5f5;
+    --violet-bg: #9C27B01c;
 }
 
 :root[data-theme="dark"] {
@@ -280,7 +280,8 @@ form {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: var(--bg-color);
+    background-color: var(--hover-bg-color);
+    backdrop-filter: blur(10px);
     display: none;
     align-items: center;
     justify-content: center;
@@ -295,6 +296,7 @@ form {
     padding: 6px;
     font-size: 26px;
     background: transparent;
+    color: var(--text-color);
     border: none;
     cursor: pointer;
     display: flex;
@@ -311,7 +313,7 @@ form {
 
 .transaction-form-container {
     max-width: 580px;
-    border: 1px solid #ffffff;
+    border: 1px solid var(--border-color);
     padding: 24px 20px;
     box-shadow: 0 0 86px 60px rgba(0, 0, 0, 0.1);
 }
