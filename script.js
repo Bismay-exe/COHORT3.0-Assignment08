@@ -17,6 +17,7 @@ const closeBtn = document.querySelector('.close-btn')
 const transactionForm = document.querySelector('#transactionForm')
 const searchInput = document.querySelector('#searchInput')
 const typeFilter = document.querySelector('#typeFilter')
+const categoryFilter = document.querySelector('#categoryFilter')
 const themeBtn = document.querySelector('#themeBtn')
 
 
@@ -400,6 +401,7 @@ function renderStats() {
 
 function renderTable() {
   let filterType = typeFilter.value
+  let filterCategory = categoryFilter.value
   let query = searchInput.value.toLowerCase()
   let sym = currencySymbols[currency] || '₹'
   let list = []
@@ -408,6 +410,8 @@ function renderTable() {
     let t = transactions[i]
 
     if (filterType !== 'all' && t.type !== filterType) continue
+
+    if (filterCategory !== 'all' && t.category !== filterCategory) continue
 
     if (query !== '') {
       let inDesc = t.description.toLowerCase().includes(query)
@@ -473,6 +477,10 @@ searchInput.addEventListener('input', function () {
 })
 
 typeFilter.addEventListener('change', function () {
+  renderTable()
+})
+
+categoryFilter.addEventListener('change', function () {
   renderTable()
 })
 

@@ -416,7 +416,6 @@ form {
 }
 
 @media screen and (min-width: 769px) {
-
     .sidebar-maximized ~ .main-page #navbar .nav-header .logo,
     .sidebar-maximized ~ .main-page #navbar .nav-header .logo-texts {
         display: none;
@@ -817,7 +816,7 @@ button {
     overflow: hidden;
 }
 
-.transactions-card>div:first-of-type {
+.filters-bar {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -874,6 +873,23 @@ button {
 }
 
 #typeFilter:focus {
+    border-color: var(--text-color);
+}
+
+#categoryFilter {
+    padding: 10px 14px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    cursor: pointer;
+    outline: none;
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+}
+
+#categoryFilter:focus {
     border-color: var(--text-color);
 }
 
