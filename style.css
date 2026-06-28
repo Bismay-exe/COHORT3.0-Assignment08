@@ -1,7 +1,7 @@
 :root,
 [data-theme="light"] {
     --bg-color: #ffffff;
-    --secondary-bg-color: #F3F0E8;
+    --secondary-bg-color: #f3f0e8;
     --text-color: #000000;
     --secondary-color: rgb(156, 156, 156);
 
@@ -9,41 +9,41 @@
 
     --border-color: #0000002d;
 
-    --red: #E11D48;
-    --red-bg: #E11D481c;
+    --red: #e11d48;
+    --red-bg: #e11d481c;
 
-    --green: #10B981;
-    --green-bg: #10B9811c;
+    --green: #10b981;
+    --green-bg: #10b9811c;
 
-    --blue: #0EA5E9;
+    --blue: #0ea5e9;
     --blue-bg: #0ea4e91c;
 
-    --purple: #A855F7;
-    --purple-bg: #A855F71c;
+    --purple: #a855f7;
+    --purple-bg: #a855f71c;
 
-    --yellow: #FFC107;
-    --yellow-bg: #FFC1071c;
+    --yellow: #ffc107;
+    --yellow-bg: #ffc1071c;
 
-    --pink: #FF6B9D;
-    --pink-bg: #FF6B9D1c;
+    --pink: #ff6b9d;
+    --pink-bg: #ff6b9d1c;
 
-    --orange: #FF9800;
-    --orange-bg: #FF98001c;
+    --orange: #ff9800;
+    --orange-bg: #ff98001c;
 
-    --cyan: #00BCD4;
-    --cyan-bg: #00BCD41c;
+    --cyan: #00bcd4;
+    --cyan-bg: #00bcd41c;
 
-    --lime: #CDDC39;
-    --lime-bg: #CDDC391c;
+    --lime: #cddc39;
+    --lime-bg: #cddc391c;
 
     --teal: #009688;
     --teal-bg: #0096881c;
 
-    --indigo: #3F51B5;
-    --indigo-bg: #3F51B51c;
+    --indigo: #3f51b5;
+    --indigo-bg: #3f51b51c;
 
-    --violet: #9C27B0;
-    --violet-bg: #9C27B01c;
+    --violet: #9c27b0;
+    --violet-bg: #9c27b01c;
 }
 
 :root[data-theme="dark"] {
@@ -69,7 +69,7 @@ body {
     width: 100%;
     background-color: var(--bg-color);
     color: var(--text-color);
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 h1,
@@ -80,7 +80,7 @@ h5,
 h6,
 span,
 p {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 .login-screen {
@@ -199,7 +199,7 @@ form {
 .input-box select {
     width: 100%;
     padding: 16px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 1rem;
     border: 1.5px solid #e5e5e5;
     border-radius: 14px;
@@ -264,7 +264,7 @@ form {
 }
 
 .underline-effect::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 1.5px;
@@ -416,7 +416,9 @@ form {
     width: 40px;
     height: 40px;
     border-radius: 12px;
-    transition: stroke 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    transition:
+        stroke 0.2s ease-in-out,
+        background-color 0.2s ease-in-out;
 }
 
 .sidebar-btn:hover {
@@ -532,7 +534,9 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: stroke 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    transition:
+        stroke 0.2s ease-in-out,
+        background-color 0.2s ease-in-out;
 }
 
 .profile .logout-btn:hover {
@@ -571,6 +575,17 @@ form {
     padding: 14px 24px;
     background-color: var(--bg-color);
     border-bottom: 1px solid var(--border-color);
+}
+
+.nav-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.sidebar-open {
+    display: none;
 }
 
 .nav-right {
@@ -623,7 +638,7 @@ button {
     margin-left: 2px;
     font-size: 18px;
     font-weight: 500;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 .separator {
@@ -773,7 +788,7 @@ button {
     border: none;
     outline: none;
     background: transparent;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 0.9rem;
     color: var(--text-color);
     width: 100%;
@@ -791,7 +806,7 @@ button {
     color: var(--text-color);
     cursor: pointer;
     outline: none;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 0.9rem;
     transition: border-color 0.2s;
 }
@@ -1046,7 +1061,7 @@ thead th {
 .settings-card select {
     width: 100%;
     padding: 12px 14px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 0.9rem;
     border: 1.5px solid var(--border-color);
     border-radius: 10px;
@@ -1067,7 +1082,7 @@ thead th {
     color: var(--bg-color);
     border: none;
     border-radius: 10px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
@@ -1112,7 +1127,7 @@ thead th {
 }
 
 .toggle-slider::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 20px;
     height: 20px;
@@ -1149,11 +1164,13 @@ thead th {
     color: #fff;
     border: none;
     border-radius: 10px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    transition: opacity 0.2s, transform 0.1s;
+    transition:
+        opacity 0.2s,
+        transform 0.1s;
 }
 
 .btn-danger:hover {
@@ -1167,14 +1184,16 @@ thead th {
     right: 28px;
     padding: 14px 22px;
     border-radius: 12px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 0.9rem;
     font-weight: 600;
     color: #fff;
     opacity: 0;
     transform: translateY(20px);
     pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
     z-index: 9999;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
@@ -1264,5 +1283,9 @@ thead th {
 
     #addTransactionBtn span {
         display: none;
+    }
+
+    .sidebar-open {
+        display: flex;
     }
 }

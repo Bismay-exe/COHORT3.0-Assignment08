@@ -1,17 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="light">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FinTrack Pro — Personal Finance Tracker</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -25,19 +27,20 @@
             <form id="loginForm">
                 <div class="input-box">
                     <label for="username">Username</label>
-                    <input required type="text" id="username" name="username" placeholder="Enter your username">
+                    <input required type="text" id="username" name="username" placeholder="Enter your username" />
                 </div>
 
                 <div class="input-box">
                     <label for="password">Password</label>
-                    <input required type="password" id="password" name="password" placeholder="Enter your password">
+                    <input required type="password" id="password" name="password" placeholder="Enter your password" />
                 </div>
 
                 <button type="submit" class="btn-submit">Sign In</button>
             </form>
 
             <div class="login-footer">
-                Don't have an account? <a href="#" id="goToRegister" class="underline-effect">Register here</a>
+                Don't have an account?
+                <a href="#" id="goToRegister" class="underline-effect">Register here</a>
             </div>
         </div>
     </section>
@@ -52,19 +55,20 @@
             <form id="registerForm">
                 <div class="input-box">
                     <label for="reg-username">Username</label>
-                    <input required type="text" id="reg-username" placeholder="Choose a username">
+                    <input required type="text" id="reg-username" placeholder="Choose a username" />
                 </div>
 
                 <div class="input-box">
                     <label for="reg-password">Password</label>
-                    <input required type="password" id="reg-password" placeholder="Choose a password">
+                    <input required type="password" id="reg-password" placeholder="Choose a password" />
                 </div>
 
                 <button type="submit" class="btn-submit">Register</button>
             </form>
 
             <div class="login-footer">
-                Already have an account? <a href="#" id="goToLogin" class="underline-effect">Login here</a>
+                Already have an account?
+                <a href="#" id="goToLogin" class="underline-effect">Login here</a>
             </div>
         </div>
     </section>
@@ -80,20 +84,25 @@
                     <p>Enterprise Finance</p>
                 </div>
                 <button class="sidebar-btn">
-                    <img src="./assets/icons/panel-left-close.svg" alt="">
+                    <img src="./assets/icons/panel-left-close.svg" alt="" />
                 </button>
             </div>
 
             <div class="sidebar-nav">
-                <div class="nav-item active"><a href="#"><i class="ri-dashboard-horizontal-line"></i>Dashboard</a>
+                <div class="nav-item active">
+                    <a href="#"><i class="ri-dashboard-horizontal-line"></i>Dashboard</a>
                 </div>
-                <div class="nav-item"><a href="#"><i class="ri-exchange-funds-line"></i>Transactions</a></div>
-                <div class="nav-item"><a href="#"><i class="ri-settings-4-line"></i>Settings</a></div>
+                <div class="nav-item">
+                    <a href="#"><i class="ri-exchange-funds-line"></i>Transactions</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#"><i class="ri-settings-4-line"></i>Settings</a>
+                </div>
             </div>
 
             <div class="profile">
                 <div class="avatar">
-                    <img src="./assets/user.png" alt="" class="avatar-img">
+                    <img src="./assets/user.png" alt="" class="avatar-img" />
                 </div>
                 <div class="user-info">
                     <p class="name">User Name</p>
@@ -106,7 +115,12 @@
 
         <div class="main-page">
             <nav id="navbar">
-                <div class="left-side">
+                <div class="nav-left">
+                    <div class="sidebar-open">
+                        <button id="openSidebarBtn" type="button" class="sidebar-btn">
+                            <img src="./assets/icons/panel-right-open.svg" alt="" />
+                        </button>
+                    </div>
                     <div class="sidebar-header">
                         <div class="logo">
                             <i class="ri-xtz-line"></i>
@@ -129,36 +143,36 @@
                 </div>
             </nav>
 
-            <section id="dashboard" class="main-section active" style="display:flex;">
+            <section id="dashboard" class="main-section active" style="display: flex">
                 <div class="main-header">
                     <h1>Financial Overview</h1>
                     <p>Real-time tracking application</p>
                 </div>
                 <div class="cards">
                     <div class="card">
-                        <div class="icon-box" style="background:var(--blue-bg)">
-                            <i class="ri-wallet-3-line" style="color:var(--blue)"></i>
+                        <div class="icon-box" style="background: var(--blue-bg)">
+                            <i class="ri-wallet-3-line" style="color: var(--blue)"></i>
                         </div>
                         <h4>Current Balance</h4>
-                        <h1 style="color:var(--blue)">₹0</h1>
+                        <h1 style="color: var(--blue)">₹0</h1>
                     </div>
                     <div class="card">
-                        <div class="icon-box" style="background:var(--green-bg)">
-                            <i class="ri-arrow-down-circle-line" style="color:var(--green)"></i>
+                        <div class="icon-box" style="background: var(--green-bg)">
+                            <i class="ri-arrow-down-circle-line" style="color: var(--green)"></i>
                         </div>
                         <h4>Total Income</h4>
-                        <h1 style="color:var(--green)">₹0</h1>
+                        <h1 style="color: var(--green)">₹0</h1>
                     </div>
                     <div class="card">
-                        <div class="icon-box" style="background:var(--red-bg)">
-                            <i class="ri-arrow-up-circle-line" style="color:var(--red)"></i>
+                        <div class="icon-box" style="background: var(--red-bg)">
+                            <i class="ri-arrow-up-circle-line" style="color: var(--red)"></i>
                         </div>
                         <h4>Total Expense</h4>
-                        <h1 style="color:var(--red)">₹0</h1>
+                        <h1 style="color: var(--red)">₹0</h1>
                     </div>
                     <div class="card">
-                        <div class="icon-box" style="background:var(--purple-bg)">
-                            <i class="ri-exchange-funds-line" style="color:var(--purple)"></i>
+                        <div class="icon-box" style="background: var(--purple-bg)">
+                            <i class="ri-exchange-funds-line" style="color: var(--purple)"></i>
                         </div>
                         <h4>Total Transactions</h4>
                         <h1>0</h1>
@@ -181,7 +195,7 @@
                     <div>
                         <div class="search-bar">
                             <i class="ri-search-line"></i>
-                            <input type="text" id="searchInput" placeholder="Search transactions...">
+                            <input type="text" id="searchInput" placeholder="Search transactions..." />
                         </div>
                         <select id="typeFilter">
                             <option value="all">All Types</option>
@@ -200,12 +214,10 @@
                                     <th>ACTIONS</th>
                                 </tr>
                             </thead>
-                            <tbody id="transactionTableBody">
-                            </tbody>
+                            <tbody id="transactionTableBody"></tbody>
                         </table>
                     </div>
                 </div>
-
             </section>
 
             <section id="settings" class="main-section">
@@ -224,7 +236,9 @@
                         </div>
                         <label for="settings-name">Display Name</label>
                         <input type="text" id="settings-name" placeholder="Your name" maxlength="40" />
-                        <button class="btn-primary" id="save-name-btn" onclick="saveName()">Save Name</button>
+                        <button class="btn-primary" id="save-name-btn" onclick="saveName()">
+                            Save Name
+                        </button>
                     </div>
 
                     <div id="currencySetting" class="settings-card">
@@ -261,20 +275,21 @@
                             <span class="settings-icon">⚠️</span>
                             <h3>Danger Zone</h3>
                         </div>
-                        <p class="danger-desc">This will permanently delete all your transactions and reset all
-                            settings.</p>
-                        <button class="btn-danger" id="reset-btn" onclick="resetAllData()">Reset All Data</button>
+                        <p class="danger-desc">
+                            This will permanently delete all your transactions and reset all
+                            settings.
+                        </p>
+                        <button class="btn-danger" id="reset-btn" onclick="resetAllData()">
+                            Reset All Data
+                        </button>
                     </div>
-
                 </div>
             </section>
-
         </div>
     </main>
 
     <section id="addTransactionScreen" class="add-transaction-screen">
         <div class="form-container transaction-form-container">
-
             <div class="transaction-form-header">
                 <h2>Add Transaction</h2>
 
@@ -284,7 +299,7 @@
             </div>
 
             <form id="transactionForm" class="transaction-form">
-                <input type="hidden" id="txId">
+                <input type="hidden" id="txId" />
 
                 <div class="input-box">
                     <label for="txType">Type</label>
@@ -296,12 +311,12 @@
 
                 <div class="input-box">
                     <label for="txDate">Date</label>
-                    <input type="date" id="txDate" required>
+                    <input type="date" id="txDate" required />
                 </div>
 
                 <div class="input-box">
                     <label for="txAmount">Amount</label>
-                    <input type="number" id="txAmount" min="0" step="0.01" placeholder="Enter an amount" required>
+                    <input type="number" id="txAmount" min="0" step="0.01" placeholder="Enter an amount" required />
                 </div>
 
                 <div class="input-box">
@@ -322,15 +337,11 @@
 
                 <div class="input-box full-width">
                     <label for="txDescription">Description</label>
-                    <input type="text" id="txDescription" placeholder="e.g. Amazon, Salary, Coffee" required>
+                    <input type="text" id="txDescription" placeholder="e.g. Amazon, Salary, Coffee" required />
                 </div>
 
-                <button class="btn-submit full-width">
-                    Save Transaction
-                </button>
-
+                <button class="btn-submit full-width">Save Transaction</button>
             </form>
-
         </div>
     </section>
 
