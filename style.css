@@ -67,7 +67,7 @@ html,
 body {
     height: 100%;
     width: 100%;
-    background-color: var(--bg-color);
+    background-color: var(--secondary-bg-color);
     color: var(--text-color);
     font-family: "Inter", sans-serif;
 }
@@ -121,9 +121,9 @@ p {
 
 .login-form-container {
     max-width: 480px;
-    border: 1px solid #ffffff;
+    border: 1px solid var(--border-color);
     padding: 64px 40px;
-    box-shadow: 0 0 86px 60px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 86px 60px var(--hover-bg-color);
 }
 
 @media screen and (max-width: 768px) {
@@ -152,7 +152,7 @@ p {
 
 .form-header p {
     font-size: 1.05rem;
-    color: #666666;
+    color: var(--secondary-color);
     font-weight: 400;
     letter-spacing: -0.01em;
 }
@@ -203,27 +203,27 @@ form {
     font-size: 1rem;
     border: 1.5px solid var(--border-color);
     border-radius: 14px;
-    background-color: var(--secondary-bg-color);
+    background-color: var(--bg-color);
     color: var(--text-color);
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
     outline: none;
 }
 
 .input-box input:focus,
 .input-box select:focus {
-    border-color: #000;
-    background: #fff;
+    border-color: var(--text-color);
+    background: var(--secondary-bg-color);
 }
 
 .input-box input::placeholder {
-    color: #a0a0a0;
+    color: var(--secondary-color);
 }
 
 .btn-submit {
     width: 100%;
     padding: 18px;
-    background-color: #000000;
-    color: #dddddd;
+    background-color: var(--text-color);
+    color: var(--secondary-color);
     border: none;
     border-radius: 14px;
     font-family: inherit;
@@ -236,8 +236,8 @@ form {
 }
 
 .btn-submit:hover {
-    color: #ffffff;
-    box-shadow: 0 8px 26px 16px rgba(0, 0, 0, 0.2);
+    color: var(--bg-color);
+    box-shadow: 0 8px 26px 16px var(--hover-bg-color);
 }
 
 .btn-submit:active {
@@ -249,11 +249,11 @@ form {
     margin-top: 40px;
     text-align: center;
     font-size: 0.9rem;
-    color: #666666;
+    color: var(--secondary-color);
 }
 
 .login-footer a {
-    color: #000000;
+    color: var(--text-color);
     font-weight: 600;
     padding-bottom: 2px;
 }
@@ -270,7 +270,7 @@ form {
     height: 1.5px;
     bottom: 0;
     left: 0;
-    background-color: #000000;
+    background-color: var(--text-color);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease-in-out;
@@ -282,6 +282,7 @@ form {
 }
 
 .add-transaction-screen {
+    z-index: 100;
     position: fixed;
     top: 0;
     left: 0;
@@ -322,7 +323,7 @@ form {
     max-width: 580px;
     border: 1px solid var(--border-color);
     padding: 24px 20px;
-    box-shadow: 0 0 86px 60px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 86px 60px var(--hover-bg-color);
 }
 
 @media screen and (max-width: 768px) {
@@ -625,7 +626,7 @@ form {
 }
 
 #navbar {
-    z-index: 999;
+    z-index: 10;
     position: sticky;
     top: 0;
     width: 100%;
@@ -1239,7 +1240,7 @@ thead th {
     background: var(--bg-color);
     border-radius: 50%;
     transition: transform 0.2s;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 4px var(--hover-bg-color);
 }
 
 .toggle-switch input:checked+.toggle-slider {

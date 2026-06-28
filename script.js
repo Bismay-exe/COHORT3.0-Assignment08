@@ -454,7 +454,7 @@ function renderTable() {
                         <span class="tx-title">${t.description}</span>
                     </div>
                 </td>
-                <td><span class="badge badge-${color}">${t.category}</span></td>
+                <td><span class="badge badge-${color}">${icon} ${t.category}</span></td>
                 <td><span class="badge badge-${t.type === 'income' ? 'green' : 'red'}"><i class="${t.type === 'income' ? 'fa-solid fa-arrow-trend-up type-icon' : 'fa-solid fa-bag-shopping type-icon'}"></i>${t.type === 'income' ? 'Income' : 'Expense'}</span></td>
                 <td class="tx-amount ${t.type}">${sign}${sym}${t.amount.toFixed(2)}</td>
                 <td>
