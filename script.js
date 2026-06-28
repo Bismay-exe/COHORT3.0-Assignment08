@@ -20,10 +20,13 @@ const typeFilter = document.querySelector('#typeFilter')
 const themeBtn = document.querySelector('#themeBtn')
 
 
-let transactions = JSON.parse(localStorage.getItem('fintrack_transactions')) || []
-let darkMode = JSON.parse(localStorage.getItem('fintrack_dark')) || false
-let currency = localStorage.getItem('fintrack_currency') || 'INR'
-let userName = localStorage.getItem('fintrack_name') || 'User Name'
+let registered_users = JSON.parse(localStorage.getItem('registered_users')) || []
+let currentUser = null
+
+let transactions = []
+let darkMode = false
+let currency = 'INR'
+let userName = 'User Name'
 let chart = null
 
 let currencySymbols = {
@@ -37,18 +40,38 @@ let currencySymbols = {
 let toastTimer
 
 document.addEventListener('DOMContentLoaded', function () {
-  let isLoggedIn = sessionStorage.getItem('loggedIn')
+  let loggedInUser = sessionStorage.getItem('loggedInUser')
 
-  if (isLoggedIn) {
-    showApp()
+  if (loggedInUser) {
+    let user = registered_users.find(u => u.username === loggedInUser)
+    if (user) {
+      loadUserData(user)
+      showApp()
+    } else {
+      sessionStorage.removeItem('loggedInUser')
+      showLogin()
+    }
   } else {
-    loginScreen.style.display = 'flex'
-    mainContainer.style.display = 'none'
-    registerScreen.style.display = 'none'
+    showLogin()
   }
+})
 
+function showLogin() {
+  loginScreen.style.display = 'flex'
+  mainContainer.style.display = 'none'
+  registerScreen.style.display = 'none'
+}
+
+function loadUserData(user) {
+  currentUser = user
+  userName = user.username
+  currency = user.currency || 'INR'
+  darkMode = user.theme === 'dark'
+  transactions = user.transactions || []
+  
   applyTheme()
-
+  applySidebarState(user.sidebar || 'maximized')
+  
   let settingsName = document.getElementById('settings-name')
   let settingsCurrency = document.getElementById('settings-currency')
   let darkToggle = document.getElementById('dark-toggle')
@@ -56,7 +79,37 @@ document.addEventListener('DOMContentLoaded', function () {
   if (settingsName) settingsName.value = userName
   if (settingsCurrency) settingsCurrency.value = currency
   if (darkToggle) darkToggle.checked = darkMode
-})
+}
+
+function saveCurrentUser() {
+  if (currentUser) {
+    currentUser.currency = currency
+    currentUser.theme = darkMode ? 'dark' : 'light'
+    currentUser.transactions = transactions
+    localStorage.setItem('registered_users', JSON.stringify(registered_users))
+  }
+}
+
+function applySidebarState(state) {
+  let sidebar = document.querySelector('.sidebar')
+  let elementsToHide = document.querySelectorAll('.logo-texts, .sidebar-header .sidebar-btn, .nav-item span, .user-info, .logout-btn')
+  let showWhenMaximized = document.querySelectorAll('.sidebar-open, #navbar .sidebar-header')
+  let navLinks = document.querySelectorAll('.sidebar-nav .nav-item a')
+
+  if (state === 'minimized') {
+    sidebar.classList.remove('sidebar-maximized')
+    sidebar.classList.add('sidebar-minimized')
+    for (let i = 0; i < navLinks.length; i++) navLinks[i].classList.add('nav-links-center')
+    for (let i = 0; i < elementsToHide.length; i++) elementsToHide[i].classList.add('minimized')
+    for (let i = 0; i < showWhenMaximized.length; i++) showWhenMaximized[i].style.display = 'flex'
+  } else {
+    sidebar.classList.remove('sidebar-minimized')
+    sidebar.classList.add('sidebar-maximized')
+    for (let i = 0; i < navLinks.length; i++) navLinks[i].classList.remove('nav-links-center')
+    for (let i = 0; i < elementsToHide.length; i++) elementsToHide[i].classList.remove('minimized')
+    for (let i = 0; i < showWhenMaximized.length; i++) showWhenMaximized[i].style.display = 'none'
+  }
+}
 
 goToRegister.addEventListener('click', function (e) {
   e.preventDefault()
@@ -81,8 +134,21 @@ registerForm.addEventListener('submit', function (e) {
     return
   }
 
-  localStorage.setItem('registered_username', regUsername)
-  localStorage.setItem('registered_password', regPassword)
+  if (registered_users.some(u => u.username === regUsername)) {
+    showToast('Username already exists', 'error')
+    return
+  }
+
+  registered_users.push({
+    username: regUsername,
+    password: regPassword,
+    currency: 'INR',
+    theme: 'light',
+    sidebar: 'maximized',
+    transactions: []
+  })
+  
+  localStorage.setItem('registered_users', JSON.stringify(registered_users))
 
   document.getElementById('username').value = regUsername
   document.getElementById('password').value = regPassword
@@ -101,45 +167,28 @@ loginForm.addEventListener('submit', function (e) {
   let enteredUsername = document.getElementById('username').value.trim()
   let enteredPassword = document.getElementById('password').value.trim()
 
-  let savedUsername = localStorage.getItem('registered_username')
-  let savedPassword = localStorage.getItem('registered_password')
+  let user = registered_users.find(u => u.username === enteredUsername && u.password === enteredPassword)
 
-  if (!savedUsername) {
-    showToast('No account found. Please register first.', 'error')
-    return
-  }
-
-  if (enteredUsername !== savedUsername || enteredPassword !== savedPassword) {
+  if (!user) {
     showToast('Wrong username or password.', 'error')
     return
   }
 
-  sessionStorage.setItem('loggedIn', 'true')
-  showApp()
-})
-
-function showApp() {
-  loginScreen.style.display = 'none'
-  registerScreen.style.display = 'none'
+  sessionStorage.setItem('loggedInUser', enteredUsername)
+  loadUserData(user)
+  
   mainContainer.style.display = 'flex'
-
+  loginScreen.style.display = 'none'
+  
   renderStats()
   renderTable()
   updateName()
-
-  let settingsName = document.getElementById('settings-name')
-  let settingsCurrency = document.getElementById('settings-currency')
-  let darkToggle = document.getElementById('dark-toggle')
-
-  if (settingsName) settingsName.value = userName
-  if (settingsCurrency) settingsCurrency.value = currency
-  if (darkToggle) darkToggle.checked = darkMode
-}
+})
 
 logoutBtn.addEventListener('click', function () {
-  sessionStorage.removeItem('loggedIn')
-  mainContainer.style.display = 'none'
-  loginScreen.style.display = 'flex'
+  sessionStorage.removeItem('loggedInUser')
+  currentUser = null
+  showLogin()
 })
 
 
@@ -183,9 +232,9 @@ navItems.forEach(function (item) {
 let sidebar = document.querySelector('.sidebar')
 let closeSidebarBtn = document.querySelector('.sidebar-header .sidebar-btn')
 let openSidebarBtn = document.getElementById('openSidebarBtn')
-let navLinks = document.getElementById('nav-links')
 let elementsToHide = document.querySelectorAll('.logo-texts, .sidebar-header .sidebar-btn, .nav-item span, .user-info, .logout-btn')
 let showWhenMaximized = document.querySelectorAll('.sidebar-open, #navbar .sidebar-header')
+let allNavLinks = document.querySelectorAll('.sidebar-nav .nav-item a')
 
 if (closeSidebarBtn && sidebar) {
   closeSidebarBtn.addEventListener('click', function () {
@@ -194,7 +243,7 @@ if (closeSidebarBtn && sidebar) {
     } else {
       sidebar.classList.remove('sidebar-maximized')
       sidebar.classList.add('sidebar-minimized')
-      navLinks.classList.add('nav-links-center')
+      for (let i = 0; i < allNavLinks.length; i++) allNavLinks[i].classList.add('nav-links-center')
       for (let i = 0; i < elementsToHide.length; i++) {
         elementsToHide[i].classList.add('minimized')
       }
@@ -212,6 +261,7 @@ if (openSidebarBtn && sidebar) {
     } else {
       sidebar.classList.remove('sidebar-minimized')
       sidebar.classList.add('sidebar-maximized')
+      for (let i = 0; i < allNavLinks.length; i++) allNavLinks[i].classList.remove('nav-links-center')
       for (let i = 0; i < elementsToHide.length; i++) {
         elementsToHide[i].classList.remove('minimized')
       }
@@ -281,7 +331,7 @@ transactionForm.addEventListener('submit', function (e) {
     return new Date(b.date) - new Date(a.date)
   })
 
-  localStorage.setItem('fintrack_transactions', JSON.stringify(transactions))
+  saveCurrentUser()
 
   renderStats()
   renderTable()
@@ -297,7 +347,7 @@ function deleteTransaction(id) {
   transactions = transactions.filter(function (t) {
     return t.id !== id
   })
-  localStorage.setItem('fintrack_transactions', JSON.stringify(transactions))
+  saveCurrentUser()
   renderStats()
   renderTable()
   showToast('Transaction deleted.', 'error')
@@ -450,7 +500,7 @@ function applyTheme() {
     document.documentElement.setAttribute('data-theme', 'light')
   }
 
-  localStorage.setItem('fintrack_dark', JSON.stringify(darkMode))
+  saveCurrentUser()
 
   let icon = themeBtn.querySelector('i')
   if (darkMode) {
@@ -473,7 +523,11 @@ function saveName() {
   }
 
   userName = val
-  localStorage.setItem('fintrack_name', userName)
+  if (currentUser) {
+    currentUser.username = userName
+    sessionStorage.setItem('loggedInUser', userName)
+    saveCurrentUser()
+  }
   updateName()
   showToast('Name saved!', 'success')
 }
@@ -481,7 +535,7 @@ function saveName() {
 function saveCurrency() {
   let select = document.getElementById('settings-currency')
   currency = select.value
-  localStorage.setItem('fintrack_currency', currency)
+  saveCurrentUser()
   renderStats()
   renderTable()
   showToast('Currency updated!', 'success')
@@ -499,14 +553,16 @@ function resetAllData() {
   if (!confirmed) return
 
   transactions = []
-  localStorage.setItem('fintrack_transactions', JSON.stringify(transactions))
-  localStorage.removeItem('fintrack_currency')
-  localStorage.removeItem('fintrack_name')
-  localStorage.removeItem('fintrack_dark')
-
   currency = 'INR'
-  userName = 'User Name'
   darkMode = false
+
+  saveCurrentUser()
+  
+  if (currentUser) {
+    applySidebarState('maximized')
+    currentUser.sidebar = 'maximized'
+    saveCurrentUser()
+  }
 
   let settingsName = document.getElementById('settings-name')
   let settingsCurrency = document.getElementById('settings-currency')

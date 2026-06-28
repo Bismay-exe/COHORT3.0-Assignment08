@@ -387,7 +387,7 @@ form {
     }
 
     .minimized {
-        display: none !important;
+        display: none;
     }
 }
 
