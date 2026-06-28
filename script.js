@@ -1,7 +1,7 @@
 const loginScreen = document.querySelector('.login-screen')
 const registerScreen = document.querySelector('.register-screen')
 const mainContainer = document.querySelector('.main-container')
-const addScreen = document.querySelector('#addTransactionScreen')
+const addTransactionScreen = document.querySelector('#addTransactionScreen')
 const tableBody = document.querySelector('#transactionTableBody')
 const toast = document.querySelector('#toast')
 const goToRegister = document.querySelector('#goToRegister')
@@ -180,10 +180,43 @@ navItems.forEach(function (item) {
   })
 })
 
-const sidebar = document.querySelector('.sidebar')
-if (sidebarBtn) {
-  sidebarBtn.addEventListener('click', function () {
-    sidebar.classList.toggle('open')
+let sidebar = document.querySelector('.sidebar')
+let closeSidebarBtn = document.querySelector('.sidebar-header .sidebar-btn')
+let openSidebarBtn = document.getElementById('openSidebarBtn')
+let elementsToHide = document.querySelectorAll('.logo-texts, .sidebar-header .sidebar-btn, .nav-item span, .user-info, .logout-btn')
+let showWhenMaximized = document.querySelectorAll('.sidebar-open, #navbar .sidebar-header')
+
+if (closeSidebarBtn && sidebar) {
+  closeSidebarBtn.addEventListener('click', function () {
+    if (window.innerWidth <= 768) {
+      sidebar.classList.remove('open')
+    } else {
+      sidebar.classList.remove('sidebar-maximized')
+      sidebar.classList.add('sidebar-minimized')
+      for (let i = 0; i < elementsToHide.length; i++) {
+        elementsToHide[i].classList.add('minimized')
+      }
+    }
+    for (let i = 0; i < showWhenMaximized.length; i++) {
+      showWhenMaximized[i].style.display = 'flex'
+    }
+  })
+}
+
+if (openSidebarBtn && sidebar) {
+  openSidebarBtn.addEventListener('click', function () {
+    if (window.innerWidth <= 768) {
+      sidebar.classList.add('open')
+    } else {
+      sidebar.classList.remove('sidebar-minimized')
+      sidebar.classList.add('sidebar-maximized')
+      for (let i = 0; i < elementsToHide.length; i++) {
+        elementsToHide[i].classList.remove('minimized')
+      }
+    }
+    for (let i = 0; i < showWhenMaximized.length; i++) {
+      showWhenMaximized[i].style.display = 'none'
+    }
   })
 }
 
@@ -191,17 +224,17 @@ addTransactionBtn.addEventListener('click', function () {
   document.querySelector('#transactionForm').reset()
   document.getElementById('txId').value = ''
   document.querySelector('.transaction-form-header h2').textContent = 'Add Transaction'
-  addScreen.style.display = 'flex'
+  addTransactionScreen.style.display = 'flex'
 })
 
 closeBtn.addEventListener('click', function () {
-  addScreen.style.display = 'none'
+  addTransactionScreen.style.display = 'none'
   document.querySelector('#transactionForm').reset()
 })
 
-addScreen.addEventListener('click', function (e) {
-  if (e.target === addScreen) {
-    addScreen.style.display = 'none'
+addTransactionScreen.addEventListener('click', function (e) {
+  if (e.target === addTransactionScreen) {
+    addTransactionScreen.style.display = 'none'
     document.querySelector('#transactionForm').reset()
   }
 })
@@ -252,7 +285,7 @@ transactionForm.addEventListener('submit', function (e) {
   renderTable()
 
 
-  addScreen.style.display = 'none'
+  addTransactionScreen.style.display = 'none'
   document.querySelector('#transactionForm').reset()
 
   showToast('Transaction added!', 'success')
@@ -287,7 +320,7 @@ function editTransaction(id) {
   document.getElementById('txDescription').value = tx.description
 
   document.querySelector('.transaction-form-header h2').textContent = 'Edit Transaction'
-  addScreen.style.display = 'flex'
+  addTransactionScreen.style.display = 'flex'
 }
 
 function renderStats() {

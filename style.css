@@ -365,17 +365,30 @@ form {
 }
 
 .sidebar {
-    min-width: 320px;
     height: 100vh;
-    padding: 24px;
-    background-color: #ffffff10;
-    backdrop-filter: blur(30px);
+    background-color: var(--bg-color);
     border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 24px;
     transition: all 0.2s ease-in-out;
+}
+
+@media screen and (min-width: 769px) {
+    .sidebar-maximized {
+        min-width: 320px;
+        padding: 24px;
+    }
+
+    .sidebar-minimized {
+        width: 60px;
+        padding: 8px;
+    }
+
+    .minimized {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -385,6 +398,10 @@ form {
         left: 0;
         z-index: 1000;
         height: 100%;
+        width: 320px;
+        padding: 24px;
+        background-color: var(--hover-bg-color);
+        backdrop-filter: blur(30px);
     }
 }
 
@@ -585,7 +602,7 @@ form {
 }
 
 .sidebar-open {
-    display: none;
+    display: flex;
 }
 
 .nav-right {
@@ -1212,12 +1229,6 @@ thead th {
     background: var(--red);
 }
 
-@media screen and (min-width: 769px) {
-    #navbar .sidebar-header {
-        display: none;
-    }
-}
-
 @media screen and (max-width: 768px) {
     .sidebar {
         transform: translateX(-100%);
@@ -1257,6 +1268,8 @@ thead th {
 
     #navbar {
         padding: 8px 12px;
+        background-color: var(--hover-bg-color);
+        backdrop-filter: blur(30px);
     }
 
     .nav-right {
