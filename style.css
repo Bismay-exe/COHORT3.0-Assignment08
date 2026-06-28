@@ -50,7 +50,7 @@
     --bg-color: #111116;
     --secondary-bg-color: #0a0a0f;
     --text-color: #f3f3f3;
-    --secondary-color: #636363;
+    --secondary-color: #757575;
 
     --hover-bg-color: #ffffff0f;
 
@@ -72,7 +72,14 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, span, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+p {
     font-family: 'Inter', sans-serif;
 }
 
@@ -554,11 +561,14 @@ form {
 }
 
 #navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 24px;
+    padding: 14px 24px;
     background-color: var(--bg-color);
     border-bottom: 1px solid var(--border-color);
 }
@@ -730,7 +740,7 @@ button {
     overflow: hidden;
 }
 
-.transactions-card > div:first-of-type {
+.transactions-card>div:first-of-type {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -790,7 +800,7 @@ button {
     border-color: var(--text-color);
 }
 
-.transactions-card > div:last-child {
+.transactions-card>div:last-child {
     overflow-x: auto;
     border-radius: 12px;
     border: 1px solid var(--border-color);
@@ -879,16 +889,55 @@ thead th {
     white-space: nowrap;
 }
 
-.badge-orange  { background: var(--orange-bg);  color: var(--orange); }
-.badge-purple  { background: var(--purple-bg);  color: var(--purple); }
-.badge-blue    { background: var(--blue-bg);    color: var(--blue);   }
-.badge-yellow  { background: var(--yellow-bg);  color: #b58900;       }
-.badge-cyan    { background: var(--cyan-bg);    color: var(--cyan);   }
-.badge-green   { background: var(--green-bg);   color: var(--green);  }
-.badge-pink    { background: var(--pink-bg);    color: var(--pink);   }
-.badge-indigo  { background: var(--indigo-bg);  color: var(--indigo); }
-.badge-violet  { background: var(--violet-bg);  color: var(--violet); }
-.badge-red     { background: var(--red-bg);     color: var(--red);    }
+.badge-orange {
+    background: var(--orange-bg);
+    color: var(--orange);
+}
+
+.badge-purple {
+    background: var(--purple-bg);
+    color: var(--purple);
+}
+
+.badge-blue {
+    background: var(--blue-bg);
+    color: var(--blue);
+}
+
+.badge-yellow {
+    background: var(--yellow-bg);
+    color: #b58900;
+}
+
+.badge-cyan {
+    background: var(--cyan-bg);
+    color: var(--cyan);
+}
+
+.badge-green {
+    background: var(--green-bg);
+    color: var(--green);
+}
+
+.badge-pink {
+    background: var(--pink-bg);
+    color: var(--pink);
+}
+
+.badge-indigo {
+    background: var(--indigo-bg);
+    color: var(--indigo);
+}
+
+.badge-violet {
+    background: var(--violet-bg);
+    color: var(--violet);
+}
+
+.badge-red {
+    background: var(--red-bg);
+    color: var(--red);
+}
 
 .delete-tx-btn {
     background: transparent;
@@ -968,7 +1017,7 @@ thead th {
 }
 
 .settings-card:hover {
-    box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
 }
 
 .settings-card-header {
@@ -1053,7 +1102,10 @@ thead th {
 
 .toggle-slider {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: var(--border-color);
     border-radius: 99px;
     transition: background-color 0.2s;
@@ -1069,14 +1121,14 @@ thead th {
     background: white;
     border-radius: 50%;
     transition: transform 0.2s;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
-.toggle-switch input:checked + .toggle-slider {
+.toggle-switch input:checked+.toggle-slider {
     background-color: var(--text-color);
 }
 
-.toggle-switch input:checked + .toggle-slider::before {
+.toggle-switch input:checked+.toggle-slider::before {
     transform: translateX(22px);
 }
 
@@ -1124,7 +1176,7 @@ thead th {
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 9999;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .toast.show {
@@ -1133,8 +1185,13 @@ thead th {
     pointer-events: auto;
 }
 
-.toast.success { background: var(--green); }
-.toast.error   { background: var(--red);   }
+.toast.success {
+    background: var(--green);
+}
+
+.toast.error {
+    background: var(--red);
+}
 
 @media screen and (min-width: 769px) {
     #navbar .sidebar-header {
@@ -1179,14 +1236,33 @@ thead th {
         left: 16px;
     }
 
-    #addTransactionBtn span {
-        display: none;
+    #navbar {
+        padding: 8px 12px;
+    }
+
+    .nav-right {
+        gap: 0px;
+    }
+
+    #themeBtn {
+        width: 20px;
+        height: 20px;
     }
 
     #addTransactionBtn {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        padding: 0;
+        padding: 18px 18px;
+        width: 20px;
+        height: 20px;
+        border-radius: 12px;
+        background-color: var(--text-color);
+        color: var(--secondary-color);
+    }
+
+    .nav-right button i {
+        font-size: 18px;
+    }
+
+    #addTransactionBtn span {
+        display: none;
     }
 }
