@@ -183,6 +183,7 @@ navItems.forEach(function (item) {
 let sidebar = document.querySelector('.sidebar')
 let closeSidebarBtn = document.querySelector('.sidebar-header .sidebar-btn')
 let openSidebarBtn = document.getElementById('openSidebarBtn')
+let navLinks = document.getElementById('nav-links')
 let elementsToHide = document.querySelectorAll('.logo-texts, .sidebar-header .sidebar-btn, .nav-item span, .user-info, .logout-btn')
 let showWhenMaximized = document.querySelectorAll('.sidebar-open, #navbar .sidebar-header')
 
@@ -193,6 +194,7 @@ if (closeSidebarBtn && sidebar) {
     } else {
       sidebar.classList.remove('sidebar-maximized')
       sidebar.classList.add('sidebar-minimized')
+      navLinks.classList.add('nav-links-center')
       for (let i = 0; i < elementsToHide.length; i++) {
         elementsToHide[i].classList.add('minimized')
       }
