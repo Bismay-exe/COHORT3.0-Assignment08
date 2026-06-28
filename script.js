@@ -108,12 +108,14 @@ function applySidebarState(state) {
   if (state === 'minimized') {
     sidebar.classList.remove('sidebar-maximized')
     sidebar.classList.add('sidebar-minimized')
+    document.querySelector('.sidebar-nav').style.marginTop = "0px"
     for (let i = 0; i < navLinks.length; i++) navLinks[i].classList.add('nav-links-center')
     for (let i = 0; i < elementsToHide.length; i++) elementsToHide[i].classList.add('minimized')
     for (let i = 0; i < showWhenMaximized.length; i++) showWhenMaximized[i].style.display = 'flex'
   } else {
     sidebar.classList.remove('sidebar-minimized')
     sidebar.classList.add('sidebar-maximized')
+    document.querySelector('.sidebar-nav').style.marginTop = "8px"
     for (let i = 0; i < navLinks.length; i++) navLinks[i].classList.remove('nav-links-center')
     for (let i = 0; i < elementsToHide.length; i++) elementsToHide[i].classList.remove('minimized')
     for (let i = 0; i < showWhenMaximized.length; i++) showWhenMaximized[i].style.display = 'none'

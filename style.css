@@ -416,16 +416,17 @@ form {
 }
 
 @media screen and (min-width: 769px) {
-    .sidebar-maximized ~ .main-page #navbar .nav-header .logo,
-    .sidebar-maximized ~ .main-page #navbar .nav-header .logo-texts {
+
+    .sidebar-maximized~.main-page #navbar .nav-header .logo,
+    .sidebar-maximized~.main-page #navbar .nav-header .logo-texts {
         display: none;
     }
 
-    .sidebar-minimized ~ .main-page #navbar .nav-header .logo {
+    .sidebar-minimized~.main-page #navbar .nav-header .logo {
         display: none;
     }
 
-    .sidebar-minimized ~ .main-page #navbar .nav-header .logo-texts {
+    .sidebar-minimized~.main-page #navbar .nav-header .logo-texts {
         display: flex;
         flex-direction: column;
         gap: 0;
@@ -499,7 +500,6 @@ form {
 }
 
 .sidebar-nav {
-    margin-top: 24px;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -681,7 +681,7 @@ button {
 
 #addTransactionBtn {
     padding: 0 16px;
-    height: 50px;
+    height: 45px;
     border-radius: 12px;
     background-color: var(--text-color);
     color: var(--secondary-color);
@@ -697,7 +697,7 @@ button {
 
 .nav-right button span {
     margin-left: 2px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     font-family: "Inter", sans-serif;
 }
