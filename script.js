@@ -188,6 +188,9 @@ if (sidebarBtn) {
 }
 
 addTransactionBtn.addEventListener('click', function() {
+    document.querySelector('#transactionForm').reset()
+    document.getElementById('txId').value = ''
+    document.querySelector('.transaction-form-header h2').textContent = 'Add Transaction'
     addScreen.style.display = 'flex'
 })
 
@@ -217,8 +220,10 @@ transactionForm.addEventListener('submit', function(e) {
         return
     }
 
-    let newTx = {
-        id: Date.now(),
+    let txId = document.getElementById('txId').value
+
+    let item = {
+        id: txId ? parseInt(txId) : Date.now(),
         type: type,
         date: date,
         amount: amount,
@@ -226,7 +231,21 @@ transactionForm.addEventListener('submit', function(e) {
         description: description
     }
 
-    transactions.unshift(newTx)
+    if (txId) {
+        for (let i = 0; i < transactions.length; i++) {
+            if (transactions[i].id === parseInt(txId)) {
+                transactions[i] = item
+                break
+            }
+        }
+    } else {
+        transactions.unshift(item)
+    }
+
+    transactions.sort(function(a, b) {
+        return new Date(b.date) - new Date(a.date)
+    })
+
     localStorage.setItem('fintrack_transactions', JSON.stringify(transactions))
 
     renderStats()
@@ -247,6 +266,28 @@ function deleteTransaction(id) {
     renderStats()
     renderTable()
     showToast('Transaction deleted.', 'error')
+}
+
+function editTransaction(id) {
+    let tx = null
+    for (let i = 0; i < transactions.length; i++) {
+        if (transactions[i].id === id) {
+            tx = transactions[i]
+            break
+        }
+    }
+    
+    if (!tx) return
+
+    document.getElementById('txId').value = tx.id
+    document.getElementById('txType').value = tx.type
+    document.getElementById('txDate').value = tx.date
+    document.getElementById('txAmount').value = tx.amount
+    document.getElementById('txCategory').value = tx.category
+    document.getElementById('txDescription').value = tx.description
+
+    document.querySelector('.transaction-form-header h2').textContent = 'Edit Transaction'
+    addScreen.style.display = 'flex'
 }
 
 function renderStats() {
@@ -337,9 +378,14 @@ function renderTable() {
                 <td><span class="badge badge-${color}">${t.category}</span></td>
                 <td class="tx-amount ${t.type}">${sign}${sym}${t.amount.toFixed(2)}</td>
                 <td>
-                    <button class="delete-tx-btn" onclick="deleteTransaction(${t.id})">
-                        <i class="ri-delete-bin-6-line"></i>
-                    </button>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="delete-tx-btn" onclick="editTransaction(${t.id})" style="color: var(--blue); border-color: var(--border-color);">
+                            <i class="ri-pencil-line"></i>
+                        </button>
+                        <button class="delete-tx-btn" onclick="deleteTransaction(${t.id})">
+                            <i class="ri-delete-bin-6-line"></i>
+                        </button>
+                    </div>
                 </td>
             </tr>
         `
