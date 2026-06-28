@@ -445,10 +445,7 @@ function renderTable() {
                 <td class="tx-date">${dateText}</td>
                 <td class="tx-desc">
                     <div class="tx-desc-inner">
-                        <span class="tx-icon">${icon}</span>
-                        <div>
-                            <p class="tx-title">${t.description}</p>
-                        </div>
+                        <span class="tx-title">${t.description}</span>
                     </div>
                 </td>
                 <td><span class="badge badge-${color}">${t.category}</span></td>

@@ -606,6 +606,7 @@ form {
 }
 
 #navbar {
+    z-index: 999;
     position: sticky;
     top: 0;
     width: 100%;
@@ -732,7 +733,7 @@ button {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.card:hover {
+.overview-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 14px 32px rgba(0, 0, 0, 0.08);
 }
@@ -1107,6 +1108,10 @@ thead th {
     font-size: 22px;
 }
 
+.red-icon {
+    color: var(--red);
+}
+
 .settings-card-header h3 {
     font-size: 17px;
     font-weight: 700;
@@ -1194,7 +1199,7 @@ thead th {
     height: 20px;
     left: 3px;
     top: 3px;
-    background: white;
+    background: var(--bg-color);
     border-radius: 50%;
     transition: transform 0.2s;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
@@ -1215,23 +1220,21 @@ thead th {
 
 .danger-desc {
     font-size: 0.85rem;
-    color: var(--secondary-color);
+    color: var(--red);
     line-height: 1.5;
 }
 
 .btn-danger {
     padding: 12px 20px;
     background: var(--red);
-    color: #fff;
+    color: #ffd1d1;
     border: none;
     border-radius: 10px;
     font-family: "Inter", sans-serif;
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    transition:
-        opacity 0.2s,
-        transform 0.1s;
+    transition: all 0.3s ease;
 }
 
 .btn-danger:hover {
