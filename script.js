@@ -23,7 +23,7 @@ const themeBtn = document.querySelector('#themeBtn')
 let registered_users = JSON.parse(localStorage.getItem('registered_users')) || []
 let currentUser = null
 
-let transactions = []
+let transactions = JSON.parse(localStorage.getItem('fintrack_transactions')) || []
 let darkMode = false
 let currency = 'INR'
 let userName = 'User Name'
@@ -62,12 +62,21 @@ function showLogin() {
   registerScreen.style.display = 'none'
 }
 
+function showApp() {
+  mainContainer.style.display = 'flex'
+  loginScreen.style.display = 'none'
+  registerScreen.style.display = 'none'
+  
+  renderStats()
+  renderTable()
+  updateName()
+}
+
 function loadUserData(user) {
   currentUser = user
   userName = user.username
   currency = user.currency || 'INR'
   darkMode = user.theme === 'dark'
-  transactions = user.transactions || []
   
   applyTheme()
   applySidebarState(user.sidebar || 'maximized')
@@ -85,7 +94,6 @@ function saveCurrentUser() {
   if (currentUser) {
     currentUser.currency = currency
     currentUser.theme = darkMode ? 'dark' : 'light'
-    currentUser.transactions = transactions
     localStorage.setItem('registered_users', JSON.stringify(registered_users))
   }
 }
@@ -144,8 +152,7 @@ registerForm.addEventListener('submit', function (e) {
     password: regPassword,
     currency: 'INR',
     theme: 'light',
-    sidebar: 'maximized',
-    transactions: []
+    sidebar: 'maximized'
   })
   
   localStorage.setItem('registered_users', JSON.stringify(registered_users))
@@ -315,7 +322,7 @@ transactionForm.addEventListener('submit', function (e) {
     return new Date(b.date) - new Date(a.date)
   })
 
-  saveCurrentUser()
+  localStorage.setItem('fintrack_transactions', JSON.stringify(transactions))
 
   renderStats()
   renderTable()
@@ -331,7 +338,7 @@ function deleteTransaction(id) {
   transactions = transactions.filter(function (t) {
     return t.id !== id
   })
-  saveCurrentUser()
+  localStorage.setItem('fintrack_transactions', JSON.stringify(transactions))
   renderStats()
   renderTable()
   showToast('Transaction deleted.', 'error')
@@ -445,14 +452,15 @@ function renderTable() {
                     </div>
                 </td>
                 <td><span class="badge badge-${color}">${t.category}</span></td>
+                <td><span class="badge badge-${t.type === 'income' ? 'green' : 'red'}"><i class="${t.type === 'income' ? 'fa-solid fa-arrow-trend-up type-icon' : 'fa-solid fa-bag-shopping type-icon'}"></i>${t.type === 'income' ? 'Income' : 'Expense'}</span></td>
                 <td class="tx-amount ${t.type}">${sign}${sym}${t.amount.toFixed(2)}</td>
                 <td>
                     <div style="display: flex; gap: 8px;">
-                        <button class="delete-tx-btn" onclick="editTransaction(${t.id})" style="color: var(--blue); border-color: var(--border-color);">
-                            <i class="ri-pencil-line"></i>
+                        <button class="edit-tx-btn" onclick="editTransaction(${t.id})">
+                            <i class="fa-regular fa-pen-to-square"></i>
                         </button>
                         <button class="delete-tx-btn" onclick="deleteTransaction(${t.id})">
-                            <i class="ri-delete-bin-6-line"></i>
+                            <i class="fa-solid fa-trash-can"></i>
                         </button>
                     </div>
                 </td>
@@ -537,6 +545,7 @@ function resetAllData() {
   if (!confirmed) return
 
   transactions = []
+  localStorage.setItem('fintrack_transactions', JSON.stringify(transactions))
   currency = 'INR'
   darkMode = false
 

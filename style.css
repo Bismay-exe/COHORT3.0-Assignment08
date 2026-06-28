@@ -40,7 +40,7 @@
     --teal-bg: #0096881c;
 
     --indigo: #3f51b5;
-    --indigo-bg: #3f51b51c;
+    --indigo-bg: #5f77ff27;
 
     --violet: #9c27b0;
     --violet-bg: #9c27b01c;
@@ -449,6 +449,18 @@ form {
 
 .sidebar-btn:hover {
     stroke: var(--text-color);
+}
+
+.logo-svg {
+    color: var(--bg-color);
+}
+
+.panel-svg {
+    color: var(--secondary-color);
+}
+
+.panel-svg:hover {
+    color: var(--text-color);
 }
 
 .logo {
@@ -982,6 +994,27 @@ thead th {
     color: var(--red);
 }
 
+.edit-tx-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.edit-tx-btn:hover {
+    background: var(--indigo-bg);
+    border-color: var(--indigo);
+    color: var(--indigo);
+}
+
+.edit-tx-btn i {
+    font-size: 16px;
+    color: #6f7dff;
+}
+
 .delete-tx-btn {
     background: transparent;
     border: 1px solid var(--border-color);
@@ -990,7 +1023,6 @@ thead th {
     height: 34px;
     cursor: pointer;
     transition: all 0.2s;
-    color: var(--secondary-color);
 }
 
 .delete-tx-btn:hover {
@@ -1001,6 +1033,7 @@ thead th {
 
 .delete-tx-btn i {
     font-size: 16px;
+    color: #ff000088;
 }
 
 .empty-state {
@@ -1303,4 +1336,12 @@ thead th {
     .sidebar-open {
         display: flex;
     }
+}
+
+
+
+
+.type-icon {
+    margin-right: 8px;
+    font-size: 18px;
 }
