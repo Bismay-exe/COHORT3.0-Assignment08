@@ -1,17 +1,3 @@
-let transactions = JSON.parse(localStorage.getItem('fintrack_transactions')) || []
-let darkMode = JSON.parse(localStorage.getItem('fintrack_dark')) || false
-let currency = localStorage.getItem('fintrack_currency') || 'INR'
-let userName = localStorage.getItem('fintrack_name') || 'User Name'
-let chart = null
-
-let currencySymbols = {
-    USD: '$',
-    EUR: '€',
-    GBP: '£',
-    INR: '₹',
-    JPY: '¥'
-}
-
 const loginScreen = document.querySelector('.login-screen')
 const registerScreen = document.querySelector('.register-screen')
 const mainContainer = document.querySelector('.main-container')
@@ -32,6 +18,22 @@ const transactionForm = document.querySelector('#transactionForm')
 const searchInput = document.querySelector('#searchInput')
 const typeFilter = document.querySelector('#typeFilter')
 const themeBtn = document.querySelector('#themeBtn')
+
+
+let transactions = JSON.parse(localStorage.getItem('fintrack_transactions')) || []
+let darkMode = JSON.parse(localStorage.getItem('fintrack_dark')) || false
+let currency = localStorage.getItem('fintrack_currency') || 'INR'
+let userName = localStorage.getItem('fintrack_name') || 'User Name'
+let chart = null
+
+let currencySymbols = {
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+    INR: '₹',
+    JPY: '¥'
+}
+
 let toastTimer
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -362,14 +364,14 @@ themeBtn.addEventListener('click', function() {
 
 function applyTheme() {
     if (darkMode) {
-        document.body.classList.add('dark')
+        document.documentElement.setAttribute('data-theme', 'dark')
     } else {
-        document.body.classList.remove('dark')
+        document.documentElement.setAttribute('data-theme', 'light')
     }
 
     localStorage.setItem('fintrack_dark', JSON.stringify(darkMode))
 
-    let icon = document.getElementById('themeBtn').querySelector('i')
+    let icon = themeBtn.querySelector('i')
     if (darkMode) {
         icon.className = 'ri-moon-fill'
     } else {
@@ -485,7 +487,7 @@ function drawChart() {
         expenseData.push(exp)
     }
 
-    let isDark = document.body.classList.contains('dark')
+    let isDark = document.documentElement.getAttribute('data-theme') === 'dark'
     let gridColor = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)'
     let textColor = isDark ? '#a0a0a0' : '#888'
 

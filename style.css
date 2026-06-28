@@ -57,7 +57,6 @@
     --border-color: #2c2c2c;
 }
 
-
 * {
     margin: 0;
     padding: 0;
@@ -275,9 +274,6 @@ form {
     transform-origin: left;
 }
 
-
-
-
 .add-transaction-screen {
     position: fixed;
     top: 0;
@@ -293,18 +289,6 @@ form {
 
 .add-transaction-screen.active {
     display: flex;
-}
-
-.form-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.form-header h2 {
-    font-size: 30px;
-    font-weight: 800;
 }
 
 .close-btn {
@@ -340,6 +324,14 @@ form {
     }
 }
 
+.transaction-form-header {
+    margin-bottom: 18px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .transaction-form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -362,7 +354,6 @@ form {
         grid-column: span 1;
     }
 }
-
 
 .sidebar {
     min-width: 320px;
@@ -398,18 +389,18 @@ form {
     flex: 1;
 }
 
-.logo-texts h2{
+.logo-texts h2 {
     font-weight: 800;
     font-size: 20px;
 }
 
-.logo-texts p{
+.logo-texts p {
     color: var(--secondary-color);
     font-weight: 600;
     font-size: 13px;
 }
 
-.sidebar-btn{
+.sidebar-btn {
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -419,7 +410,7 @@ form {
     transition: stroke 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
-.sidebar-btn:hover{
+.sidebar-btn:hover {
     stroke: var(--text-color);
 }
 
@@ -434,7 +425,7 @@ form {
     gap: 12px;
 }
 
-.logo i{
+.logo i {
     font-size: 26px;
     color: var(--bg-color);
 }
@@ -447,13 +438,13 @@ form {
     gap: 12px;
 }
 
-.sidebar-nav .nav-item{
+.sidebar-nav .nav-item {
     padding: 12px 16px;
     border-radius: 14px;
     transition: all 0.3s ease;
 }
 
-.sidebar-nav .nav-item a{
+.sidebar-nav .nav-item a {
     text-decoration: none;
     color: var(--secondary-color);
     font-weight: 500;
@@ -463,24 +454,24 @@ form {
     transition: all 0.3s ease;
 }
 
-.sidebar-nav .nav-item:hover{
+.sidebar-nav .nav-item:hover {
     background-color: var(--hover-bg-color);
 }
 
-.sidebar-nav .nav-item:hover a{
+.sidebar-nav .nav-item:hover a {
     color: var(--text-color);
 }
 
-.sidebar-nav .nav-item i{
+.sidebar-nav .nav-item i {
     font-size: 20px;
 }
 
-.sidebar-nav .nav-item.active{
+.sidebar-nav .nav-item.active {
     background-color: var(--text-color);
     color: var(--bg-color);
 }
 
-.sidebar-nav .nav-item.active a{
+.sidebar-nav .nav-item.active a {
     color: var(--bg-color);
 }
 
@@ -492,38 +483,37 @@ form {
     padding-top: 12px;
 }
 
-.profile .avatar{
+.profile .avatar {
     width: 48px;
     height: 48px;
     border-radius: 50%;
     overflow: hidden;
-    
 }
 
-.profile .avatar-img{
+.profile .avatar-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.profile .user-info{
+.profile .user-info {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.profile .name{
+.profile .name {
     font-size: 16px;
     font-weight: 600;
 }
 
-.profile .email{
+.profile .email {
     font-size: 13px;
     font-weight: 400;
 }
 
-.profile .logout-btn{
+.profile .logout-btn {
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -536,17 +526,17 @@ form {
     transition: stroke 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
-.profile .logout-btn:hover{
+.profile .logout-btn:hover {
     background-color: var(--red-bg);
     border: 1px solid var(--red);
 }
 
-.profile .logout-btn i{
+.profile .logout-btn i {
     font-size: 24px;
     color: var(--secondary-color);
 }
 
-.profile .logout-btn:hover i{
+.profile .logout-btn:hover i {
     color: var(--red);
 }
 
@@ -561,7 +551,7 @@ form {
     overflow-y: auto;
 }
 
-#navbar{
+#navbar {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -569,10 +559,6 @@ form {
     padding: 24px;
     background-color: var(--bg-color);
     border-bottom: 1px solid var(--border-color);
-}
-
-#navbar .sidebar-header {
-    /* display: none; */
 }
 
 .nav-right {
@@ -617,18 +603,18 @@ button {
     color: var(--bg-color);
 }
 
-.nav-right button i{
+.nav-right button i {
     font-size: 24px;
 }
 
-.nav-right button span{
+.nav-right button span {
     margin-left: 2px;
     font-size: 18px;
     font-weight: 500;
     font-family: 'Inter', sans-serif;
 }
 
-.separator{
+.separator {
     width: 1px;
     height: 40px;
     background-color: var(--border-color);
@@ -639,18 +625,22 @@ button {
     flex: 1;
     background-color: var(--secondary-bg-color);
     padding: 36px;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 24px;
     overflow-y: scroll;
 }
 
-.main-header h1{
+.main-section.active {
+    display: flex;
+}
+
+.main-header h1 {
     font-weight: 800;
     font-size: 32px;
 }
 
-.main-header p{
+.main-header p {
     font-weight: 500;
     font-size: 14px;
     color: var(--secondary-color);
@@ -662,13 +652,12 @@ button {
     gap: 20px;
 }
 
-
-.card{
+.card {
     min-width: 260px;
     border-radius: 14px;
     border: 1px solid var(--border-color);
     padding: 18px 22px;
-    background-color: #ffffff;
+    background-color: var(--bg-color);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -676,12 +665,12 @@ button {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.card:hover{
+.card:hover {
     transform: translateY(-6px);
     box-shadow: 0 14px 32px rgba(0, 0, 0, 0.08);
 }
 
-.card .icon-box{
+.card .icon-box {
     width: 50px;
     height: 50px;
     background-color: var(--violet-bg);
@@ -691,15 +680,12 @@ button {
     align-items: center;
 }
 
-.card .icon-box i{
+.card .icon-box i {
     font-size: 28px;
-}
-
-.card .icon-box i{
     color: var(--violet);
 }
 
-.card h4{
+.card h4 {
     font-size: 16px;
     font-weight: 600;
     color: var(--secondary-color);
@@ -710,16 +696,6 @@ button {
     font-weight: 700;
 }
 
-/* ── Section visibility ──────────────────── */
-.main-section {
-    display: none;
-}
-
-.main-section.active {
-    display: flex;
-}
-
-/* ── Chart card ──────────────────────────── */
 .chart-card {
     min-width: unset;
     padding: 24px;
@@ -744,7 +720,6 @@ button {
     position: relative;
 }
 
-/* ── Transactions card ───────────────────── */
 .transactions-card {
     min-width: unset;
     flex-direction: column;
@@ -813,7 +788,6 @@ button {
     border-color: var(--text-color);
 }
 
-/* ── Table ───────────────────────────────── */
 .transactions-card > div:last-child {
     overflow-x: auto;
     border-radius: 12px;
@@ -894,7 +868,6 @@ thead th {
     color: var(--red);
 }
 
-/* ── Badge ───────────────────────────────── */
 .badge {
     display: inline-block;
     padding: 4px 10px;
@@ -915,7 +888,6 @@ thead th {
 .badge-violet  { background: var(--violet-bg);  color: var(--violet); }
 .badge-red     { background: var(--red-bg);     color: var(--red);    }
 
-/* ── Delete btn ──────────────────────────── */
 .delete-tx-btn {
     background: transparent;
     border: 1px solid var(--border-color);
@@ -937,7 +909,6 @@ thead th {
     font-size: 16px;
 }
 
-/* ── Empty state ─────────────────────────── */
 .empty-state {
     text-align: center;
     padding: 60px 20px !important;
@@ -959,7 +930,6 @@ thead th {
     color: var(--secondary-color);
 }
 
-/* ── Settings ────────────────────────────── */
 .page-header {
     display: flex;
     justify-content: space-between;
@@ -1057,7 +1027,6 @@ thead th {
     opacity: 0.85;
 }
 
-/* Toggle switch */
 .toggle-row {
     display: flex;
     justify-content: space-between;
@@ -1109,7 +1078,6 @@ thead th {
     transform: translateX(22px);
 }
 
-/* Danger card */
 .danger-card {
     border-color: var(--red);
     background: var(--red-bg);
@@ -1139,7 +1107,6 @@ thead th {
     transform: translateY(-1px);
 }
 
-/* ── Toast ───────────────────────────────── */
 .toast {
     position: fixed;
     bottom: 28px;
@@ -1167,109 +1134,12 @@ thead th {
 .toast.success { background: var(--green); }
 .toast.error   { background: var(--red);   }
 
-/* ── Dark Mode ───────────────────────────── */
-body.dark {
-    --bg-color:           #0f0f13;
-    --secondary-bg-color: #17171e;
-    --text-color:         #f0f0f0;
-    --secondary-color:    #6b6b7a;
-    --hover-bg-color:     rgba(255,255,255,0.06);
-    --border-color:       rgba(255,255,255,0.09);
-    --bg-main:            #17171e;
-}
-
-body.dark .card {
-    background-color: #1a1a24;
-}
-
-body.dark .input-box input,
-body.dark .input-box select {
-    background-color: #1a1a24;
-    border-color: rgba(255,255,255,0.1);
-    color: #f0f0f0;
-}
-
-body.dark .input-box input:focus,
-body.dark .input-box select:focus {
-    border-color: rgba(255,255,255,0.35);
-}
-
-body.dark .login-form-container,
-body.dark .transaction-form-container {
-    background-color: #0f0f13;
-    border-color: rgba(255,255,255,0.07);
-    box-shadow: 0 0 86px 60px rgba(0,0,0,0.4);
-}
-
-body.dark .btn-submit {
-    background-color: #f0f0f0;
-    color: #0f0f13;
-}
-
-body.dark .btn-submit:hover {
-    background-color: #ffffff;
-    box-shadow: 0 8px 30px rgba(255,255,255,0.1);
-}
-
-body.dark .settings-card {
-    background: #1a1a24;
-}
-
-body.dark .danger-card {
-    background: rgba(225,29,72,0.1);
-}
-
-body.dark thead {
-    background-color: #1a1a24;
-}
-
-body.dark .tx-icon {
-    background-color: #22222e;
-}
-
-body.dark .search-bar {
-    background: #1a1a24;
-}
-
-body.dark .settings-card input[type="text"],
-body.dark .settings-card select {
-    background: #22222e;
-    border-color: rgba(255,255,255,0.1);
-}
-
-body.dark #typeFilter {
-    background: #1a1a24;
-    border-color: rgba(255,255,255,0.1);
-}
-
-body.dark .sidebar {
-    background-color: rgba(255,255,255,0.03);
-}
-
-body.dark .form-header p {
-    color: #888;
-}
-
-body.dark .login-footer {
-    color: #888;
-}
-
-body.dark .login-footer a {
-    color: #e0e0e0;
-}
-
-body.dark .underline-effect::after {
-    background-color: #e0e0e0;
-}
-
-/* ── Navbar: hide logo on desktop (sidebar shows it) ── */
 @media screen and (min-width: 769px) {
     #navbar .sidebar-header {
         display: none;
     }
 }
 
-/* ── Mobile ──────────────────────────────── */
 @media screen and (max-width: 768px) {
     .sidebar {
         transform: translateX(-100%);
