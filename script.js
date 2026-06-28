@@ -238,36 +238,20 @@ let allNavLinks = document.querySelectorAll('.sidebar-nav .nav-item a')
 
 if (closeSidebarBtn && sidebar) {
   closeSidebarBtn.addEventListener('click', function () {
-    if (window.innerWidth <= 768) {
-      sidebar.classList.remove('open')
-    } else {
-      sidebar.classList.remove('sidebar-maximized')
-      sidebar.classList.add('sidebar-minimized')
-      for (let i = 0; i < allNavLinks.length; i++) allNavLinks[i].classList.add('nav-links-center')
-      for (let i = 0; i < elementsToHide.length; i++) {
-        elementsToHide[i].classList.add('minimized')
-      }
-    }
-    for (let i = 0; i < showWhenMaximized.length; i++) {
-      showWhenMaximized[i].style.display = 'flex'
+    applySidebarState('minimized')
+    if (currentUser) {
+      currentUser.sidebar = 'minimized'
+      saveCurrentUser()
     }
   })
 }
 
 if (openSidebarBtn && sidebar) {
   openSidebarBtn.addEventListener('click', function () {
-    if (window.innerWidth <= 768) {
-      sidebar.classList.add('open')
-    } else {
-      sidebar.classList.remove('sidebar-minimized')
-      sidebar.classList.add('sidebar-maximized')
-      for (let i = 0; i < allNavLinks.length; i++) allNavLinks[i].classList.remove('nav-links-center')
-      for (let i = 0; i < elementsToHide.length; i++) {
-        elementsToHide[i].classList.remove('minimized')
-      }
-    }
-    for (let i = 0; i < showWhenMaximized.length; i++) {
-      showWhenMaximized[i].style.display = 'none'
+    applySidebarState('maximized')
+    if (currentUser) {
+      currentUser.sidebar = 'maximized'
+      saveCurrentUser()
     }
   })
 }

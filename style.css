@@ -402,6 +402,15 @@ form {
         padding: 24px;
         background-color: var(--hover-bg-color);
         backdrop-filter: blur(30px);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar-minimized {
+        transform: translateX(-100%);
+    }
+
+    .sidebar-maximized {
+        transform: translateX(0);
     }
 }
 
@@ -1232,15 +1241,6 @@ thead th {
 }
 
 @media screen and (max-width: 768px) {
-    .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-    }
-
-    .sidebar.open {
-        transform: translateX(0);
-    }
-
     .main-section {
         padding: 20px 16px;
     }
